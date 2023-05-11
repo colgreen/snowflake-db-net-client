@@ -168,7 +168,7 @@ namespace Snowflake.Client
             var firstColumn = response.Data.RowType.FirstOrDefault();
             var firstColumnValue = response.Data.RowSet.FirstOrDefault()?.FirstOrDefault();
 
-            var result = SnowflakeDataMapper.MapTo<T>(firstColumn, firstColumnValue);
+            var result = await SnowflakeDataMapper.MapTo<T>(firstColumn, firstColumnValue).ConfigureAwait(false);
             return result;
         }
 

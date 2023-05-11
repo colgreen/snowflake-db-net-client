@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Snowflake.Client.Tests.UnitTests
 {
@@ -99,97 +100,97 @@ namespace Snowflake.Client.Tests.UnitTests
         }
 
         [Test]
-        public void ResponseWithValues_MapTo_SingleValue()
+        public async Task ResponseWithValues_MapTo_SingleValue()
         {
             var responseSample = GetFakeResponse();
             var rowSet = responseSample.RowSet[0];
             var rowType = responseSample.RowType;
 
-            var stringValue = SnowflakeDataMapper.MapTo<string>(rowType[0], rowSet[0]);
+            var stringValue = await SnowflakeDataMapper.MapTo<string>(rowType[0], rowSet[0]);
             Assert.AreEqual("Sometext", stringValue);
 
-            var boolValue = SnowflakeDataMapper.MapTo<bool>(rowType[1], rowSet[1]);
+            var boolValue = await SnowflakeDataMapper.MapTo<bool>(rowType[1], rowSet[1]);
             Assert.AreEqual(true, boolValue);
 
-            var intValue = SnowflakeDataMapper.MapTo<int>(rowType[2], rowSet[2]);
+            var intValue = await SnowflakeDataMapper.MapTo<int>(rowType[2], rowSet[2]);
             Assert.AreEqual(7, intValue);
 
-            var floatValue = SnowflakeDataMapper.MapTo<float>(rowType[3], rowSet[3]);
+            var floatValue = await SnowflakeDataMapper.MapTo<float>(rowType[3], rowSet[3]);
             Assert.AreEqual(27.6F, floatValue);
 
-            var decimalValue = SnowflakeDataMapper.MapTo<decimal>(rowType[4], rowSet[4]);
+            var decimalValue = await SnowflakeDataMapper.MapTo<decimal>(rowType[4], rowSet[4]);
             Assert.AreEqual(19.239834M, decimalValue);
 
             var dateTimeExpected = DateTime.ParseExact("2020-09-13 12:26:40.0000000", "yyyy-MM-dd HH:mm:ss.fffffff", CultureInfo.InvariantCulture);
-            var dateTimeValue = SnowflakeDataMapper.MapTo<DateTime>(rowType[5], rowSet[5]);
+            var dateTimeValue = await SnowflakeDataMapper.MapTo<DateTime>(rowType[5], rowSet[5]);
             Assert.AreEqual(dateTimeExpected, dateTimeValue);
 
             var dateTimeOffsetExpected = DateTimeOffset.ParseExact("2020-09-13 12:26:40.0000000", "yyyy-MM-dd HH:mm:ss.fffffff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
-            var dateTimeOffsetValue = SnowflakeDataMapper.MapTo<DateTimeOffset>(rowType[6], rowSet[6]);
+            var dateTimeOffsetValue = await SnowflakeDataMapper.MapTo<DateTimeOffset>(rowType[6], rowSet[6]);
             Assert.AreEqual(dateTimeOffsetExpected, dateTimeOffsetValue);
 
-            var guidValue = SnowflakeDataMapper.MapTo<Guid>(rowType[7], rowSet[7]);
+            var guidValue = await SnowflakeDataMapper.MapTo<Guid>(rowType[7], rowSet[7]);
             Assert.AreEqual(Guid.Parse("e7412bbf-88ee-4149-b341-101e0f72ec7c"), guidValue);
 
-            var bytesValues = SnowflakeDataMapper.MapTo<byte[]>(rowType[8], rowSet[8]);
+            var bytesValues = await SnowflakeDataMapper.MapTo<byte[]>(rowType[8], rowSet[8]);
             Assert.AreEqual(new byte[] { 0, 128, 255 }, bytesValues);
         }
 
         [Test]
-        public void ResponseWithStringNull_MapTo_SingleValueNullable()
+        public async Task ResponseWithStringNull_MapTo_SingleValueNullable()
         {
             var responseSample = GetFakeResponse();
             var rowSet = responseSample.RowSet[1];
             var rowType = responseSample.RowType;
 
-            var boolValue = SnowflakeDataMapper.MapTo<bool?>(rowType[1], rowSet[1]);
+            var boolValue = await SnowflakeDataMapper.MapTo<bool?>(rowType[1], rowSet[1]);
             Assert.AreEqual(null, boolValue);
 
-            var intValue = SnowflakeDataMapper.MapTo<int?>(rowType[2], rowSet[2]);
+            var intValue = await SnowflakeDataMapper.MapTo<int?>(rowType[2], rowSet[2]);
             Assert.AreEqual(null, intValue);
 
-            var floatValue = SnowflakeDataMapper.MapTo<float?>(rowType[3], rowSet[3]);
+            var floatValue = await SnowflakeDataMapper.MapTo<float?>(rowType[3], rowSet[3]);
             Assert.AreEqual(null, floatValue);
 
-            var decimalValue = SnowflakeDataMapper.MapTo<decimal?>(rowType[4], rowSet[4]);
+            var decimalValue = await SnowflakeDataMapper.MapTo<decimal?>(rowType[4], rowSet[4]);
             Assert.AreEqual(null, decimalValue);
 
-            var dateTimeValue = SnowflakeDataMapper.MapTo<DateTime?>(rowType[5], rowSet[5]);
+            var dateTimeValue = await SnowflakeDataMapper.MapTo<DateTime?>(rowType[5], rowSet[5]);
             Assert.AreEqual(null, dateTimeValue);
 
-            var dateTimeOffsetValue = SnowflakeDataMapper.MapTo<DateTimeOffset?>(rowType[6], rowSet[6]);
+            var dateTimeOffsetValue = await SnowflakeDataMapper.MapTo<DateTimeOffset?>(rowType[6], rowSet[6]);
             Assert.AreEqual(null, dateTimeOffsetValue);
 
-            var guidValue = SnowflakeDataMapper.MapTo<Guid?>(rowType[7], rowSet[7]);
+            var guidValue = await SnowflakeDataMapper.MapTo<Guid?>(rowType[7], rowSet[7]);
             Assert.AreEqual(null, guidValue);
         }
 
         [Test]
-        public void ResponseWithNull_MapTo_SingleValueNullable()
+        public async Task ResponseWithNull_MapTo_SingleValueNullable()
         {
             var responseSample = GetFakeResponse();
             var rowSet = responseSample.RowSet[2];
             var rowType = responseSample.RowType;
 
-            var boolValue = SnowflakeDataMapper.MapTo<bool?>(rowType[1], rowSet[1]);
+            var boolValue = await SnowflakeDataMapper.MapTo<bool?>(rowType[1], rowSet[1]);
             Assert.AreEqual(null, boolValue);
 
-            var intValue = SnowflakeDataMapper.MapTo<int?>(rowType[2], rowSet[2]);
+            var intValue = await SnowflakeDataMapper.MapTo<int?>(rowType[2], rowSet[2]);
             Assert.AreEqual(null, intValue);
 
-            var floatValue = SnowflakeDataMapper.MapTo<float?>(rowType[3], rowSet[3]);
+            var floatValue = await SnowflakeDataMapper.MapTo<float?>(rowType[3], rowSet[3]);
             Assert.AreEqual(null, floatValue);
 
-            var decimalValue = SnowflakeDataMapper.MapTo<decimal?>(rowType[4], rowSet[4]);
+            var decimalValue = await SnowflakeDataMapper.MapTo<decimal?>(rowType[4], rowSet[4]);
             Assert.AreEqual(null, decimalValue);
 
-            var dateTimeValue = SnowflakeDataMapper.MapTo<DateTime?>(rowType[5], rowSet[5]);
+            var dateTimeValue = await SnowflakeDataMapper.MapTo<DateTime?>(rowType[5], rowSet[5]);
             Assert.AreEqual(null, dateTimeValue);
 
-            var dateTimeOffsetValue = SnowflakeDataMapper.MapTo<DateTimeOffset?>(rowType[6], rowSet[6]);
+            var dateTimeOffsetValue = await SnowflakeDataMapper.MapTo<DateTimeOffset?>(rowType[6], rowSet[6]);
             Assert.AreEqual(null, dateTimeOffsetValue);
 
-            var guidValue = SnowflakeDataMapper.MapTo<Guid?>(rowType[7], rowSet[7]);
+            var guidValue = await SnowflakeDataMapper.MapTo<Guid?>(rowType[7], rowSet[7]);
             Assert.AreEqual(null, guidValue);
         }
 
