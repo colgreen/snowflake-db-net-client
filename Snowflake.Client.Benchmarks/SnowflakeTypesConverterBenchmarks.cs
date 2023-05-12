@@ -9,14 +9,14 @@ namespace Snowflake.Client.Benchmarks
         static readonly string __hexCharsLong = GenerateRandomHex(2_000_000);
 
         [Benchmark]
-        public void HexToBytes_Short()
+        public void HexToBase64_Short()
         {
             byte[] bytes = SnowflakeTypesConverter.HexToBytes("0a0b0c");
             string base64String = Convert.ToBase64String(bytes);
         }
 
         [Benchmark]
-        public void HexToBytes_Long()
+        public void HexToBase64_Long()
         {
             byte[] bytes = SnowflakeTypesConverter.HexToBytes(__hexCharsLong);
             string base64String = Convert.ToBase64String(bytes);
